@@ -72,3 +72,8 @@ select	first_name, last_name,
         salary*12+5000 보너스,
         phone_number
 from employees;
+
+-- MySQL은 테이블명을 생략할 수 있다. (오라클은 안됨)
+select	first_name,
+		'(주)개발자' as company
+from	employees;
