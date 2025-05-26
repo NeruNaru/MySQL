@@ -52,7 +52,8 @@ order by max_salary desc;
 월급이 14000 미만 10000 이상인 직원의 이름(first_name), 월급, 커미션퍼센트 를  월급순(내림차순) 출력하세오.
 단 커미션퍼센트 가 null 이면 0 으로 나타내시오
 */
-select	first_name, salary, commission_pct
+select	first_name, salary,
+		ifnull(commission_pct, 0)
 from employees
 order by salary desc;
 
@@ -61,7 +62,9 @@ order by salary desc;
 부서번호가 10, 90, 100 인 직원의 이름, 월급, 입사일, 부서번호를 나타내시오
 입사일은 1977-12 와 같이 표시하시오
 */
-select	first_name, salary, hire_date, department_id
+select	first_name, salary, 
+		date_format(hire_date, '%y-%m'),
+        department_id
 from employees
 where department_id = 10
 or department_id = 90
