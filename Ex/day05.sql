@@ -167,7 +167,7 @@ select	*
 from employees e, locations l
 where e.salary = l.location_id
 ;
-
+-+
 select	*
 from employees
 ;

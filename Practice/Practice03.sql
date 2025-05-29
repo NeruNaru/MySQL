@@ -23,12 +23,13 @@ select	employee_id,
 		first_name,
         salary,
         department_name
-        
+        job_title
 from employees e
 inner join departments d
 		on e.department_id = d.department_id
 inner join jobs j
 		on e.job_id = j.job_id
+order by employee_id asc
 ;
 
 /*
@@ -36,6 +37,15 @@ inner join jobs j
 문제2에서 부서가 없는 Kimberely(사번 178)까지 표시해 보세요
 (107건)
 */
+select	employee_id,
+		first_name,
+        salary,
+        department_name
+        job_title
+from employees e, departments d, jobs j
+where e.department_id = d.department_id
+and e.job_id = j.job_id
+;
 
 /*
 문제3.
@@ -44,6 +54,13 @@ inner join jobs j
 부서가 없는 도시는 표시하지 않습니다.
 (27건)
 */
+select	location_id,
+		city,
+        department_name,
+        department_id
+from employees e, departments d, locations l
+where e.department_id = d.department_id
+;
 
 /*
 문제3-1.
