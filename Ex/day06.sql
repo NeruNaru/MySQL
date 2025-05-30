@@ -289,6 +289,99 @@ from employees e,	(select department_id,
 					group by department_id) s
 where e.department_id = s.department_id
 ;
+
+-- ---------------------------------------------------------------
+-- 직원관리 페이지, 사번이 작은 직원이 위쪽에 출력
+
+select	employee_id,
+		first_name,
+		salary
+from employees
+order by employee_id asc
+limit 7		-- 처음부터 7개
+;
+-- ----------------------------
+select	employee_id,
+		first_name,
+		salary
+from employees
+order by employee_id asc
+limit 5,10		-- 5번부터 10개
+;
+
+-- -----------------------------
+-- 다른표현
+select	employee_id,
+		first_name,
+		salary
+from employees
+order by employee_id asc
+limit 5 offset 5		-- 6번째부터 5개
+;
+
+select	employee_id,
+		first_name,
+		salary
+from employees
+order by employee_id asc
+limit 5  offset 10		-- 11번째부터 5개
+;
+
+-- 07년에 입사한 직원중 급여가 가장 많은 직원중 3-7등의 이름, 급여, 입사일은?
+
+select	hire_date,
+		first_name,
+        salary
+from employees
+where hire_date >= '2007-01-01'
+and hire_date < '2008-01-01'
+order by salary desc
+limit 5 offset 2
+;
+
+select	date_format(hire_date, '%y'),
+		first_name,
+        salary
+from employees
+where date_format(hire_date, '%y') = '07'
+order by salary desc
+limit 5 offset 2
+;
+
+-- 부서번호가 100인 지구언중 월급을 가장 많이 받은 직원의 이름, 월급, 부서번호를 출력하세요
+-- 부서번호 100인 직원의 최고임금
+select	department_id,
+		max(salary)
+from employees
+where department_id = 100
+;
+
+select	*
+from employees
+where department_id = 100
+;
+
+-- 최종
+select	first_name,
+		salary,
+        department_id
+from employees
+where salary = (select	max(salary)
+				from employees
+                where department_id = 100)
+and department_id = 100
+;
+-- -------------------------------------------
+-- limit 사용
+select	first_name,
+		salary,
+		department_id
+from employees
+where department_id = 100
+order by salary desc
+limit 0, 1
+;
+
 select	*
 from employees
 ;
